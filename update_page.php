@@ -43,7 +43,7 @@
 
         $query = "update students set first_name = '$fname', `last_name`= '$lname',`age`='$age' where `id` = '$idnew'";
         $result = mysqli_query($connection, $query);
-        if($result)  header('location:index.php?message=Student update successfully!');;
+        if($result)  header('location:index.php?message=Student update successfully!');
     }
 
     ?>
