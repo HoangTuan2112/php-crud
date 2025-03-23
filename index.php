@@ -11,8 +11,10 @@
     </head>
 
 <body>
+    <?php include('dbcon.php') ?>
     <h1 id="main-title">CRUD APPLICATION IN PHP</h1>
     <div class="container">
+        <h2>All students</h2>
         <table class="table table-hover table-borderd table-striped" >
             <thead>
                 <tr>
@@ -23,24 +25,28 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
+                <?php 
+                    $query="Select * from `students`";
+                    $result=mysqli_query($connection,$query);
+                    if(!$result){
+                        die("".mysqli_error($connection));
+                    }
+                    else {
+                        while($row=mysqli_fetch_assoc($result)){
+                        ?>
+                        <tr>
+                            <td><?php echo $row['id'] ?></td>
+                            <td><?php echo $row['first_name'] ?></td>
+                            <td><?php echo $row['last_name'] ?></td>
+                            <td><?php echo $row['age'] ?></td>
+                        </tr>
+                        <?php
+                        }
+                    }
+  
+
+                ?>
+                
             </tbody>
         </table>
     </div>
