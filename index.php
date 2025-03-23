@@ -5,17 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
+</head>
 
 <body>
     <?php include('dbcon.php') ?>
     <h1 id="main-title">CRUD APPLICATION IN PHP</h1>
     <div class="container">
-        <h2>All students</h2>
-        <table class="table table-hover table-borderd table-striped" >
+        <div class="box1">
+            <h2>All students</h2>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD
+                STUDENT</button>
+
+        </div>
+        <table class="table table-hover table-borderd table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -25,14 +33,13 @@
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    $query="Select * from `students`";
-                    $result=mysqli_query($connection,$query);
-                    if(!$result){
-                        die("".mysqli_error($connection));
-                    }
-                    else {
-                        while($row=mysqli_fetch_assoc($result)){
+                <?php
+                $query = "Select * from `students`";
+                $result = mysqli_query($connection, $query);
+                if (!$result) {
+                    die("" . mysqli_error($connection));
+                } else {
+                    while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                         <tr>
                             <td><?php echo $row['id'] ?></td>
@@ -41,24 +48,57 @@
                             <td><?php echo $row['age'] ?></td>
                         </tr>
                         <?php
-                        }
                     }
-  
+                }
+
 
                 ?>
-                
+
             </tbody>
         </table>
+
+        <?php
+        if (isset($_GET['message'])){
+            echo "<h6>". $_GET["message"] ."</h6>";
+        }
+        ?>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+
+
+
+    <form action="insert_data.php" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="f-name">Frist Name</label>
+                            <input type="text" name="f-name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="l-name">Last Name</label>
+                            <input type="text" name="l-name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="text" name="age" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Add" name="add_students"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
+
 
 </html>
