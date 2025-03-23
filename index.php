@@ -27,7 +27,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Frist Name</th>
+                    <th>First Name</th>
                     <th>Last Name</th>
                     <th>Age</th>
                 </tr>
@@ -46,6 +46,8 @@
                             <td><?php echo $row['first_name'] ?></td>
                             <td><?php echo $row['last_name'] ?></td>
                             <td><?php echo $row['age'] ?></td>
+                            <td><a href="update_page.php?id=<?php echo $row['id'] ?>" class="btn btn-success">Update</a></td>
+                            <td><a href="delete_page.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a></td>
                         </tr>
                         <?php
                     }
@@ -77,7 +79,7 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="f-name">Frist Name</label>
+                            <label for="f-name">First Name</label>
                             <input type="text" name="f-name" class="form-control">
                         </div>
                         <div class="form-group">

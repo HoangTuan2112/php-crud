@@ -12,7 +12,7 @@ if (isset($_POST["add_students"])) {
         exit;
     }
      else {
-        $query = "INSERT INTO `students` (`first_name`, `last_name`, `age`) VALUES ('$f_name', '$l_name', '$age')";
+        $query = "INSERT INTO students (`first_name`, `last_name`, `age`) VALUES ('$f_name', '$l_name', '$age')";
         $result = mysqli_query($connection, $query);
 
         if (!$result) {
